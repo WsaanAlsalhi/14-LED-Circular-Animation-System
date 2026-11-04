@@ -1,135 +1,126 @@
+#  14 LED Circular Animation System
 
-14-LED Circular Animation System
-A manually controlled LED animation project built with an Arduino
-Nano, 14 red LEDs, and one push button.
+An Arduino Nano-based LED animation project featuring 14 red LEDs and a single push button. The system provides multiple lighting patterns and adjustable animation speeds with simple manual control.
 
-The project provides six lighting patterns and four selectable speeds. A
-single button controls both pattern selection and speed adjustment.
-Patterns do not change automatically.
+##  Features
 
-Features
-14 individually controlled LEDs arranged in a circular layout.
-6 selectable animation patterns:
-Circular Running Light
-Alternate Flash
-Opposite Chase
-Scanner (back and forth)
-Comet Effect
-Heartbeat-style flash
-4 speed levels.
-One-button control.
-Manual pattern selection; no automatic pattern switching.
-Button debounce to reduce accidental multiple presses.
-Components
-Arduino Nano
-14 red LEDs
-14 resistors (220--330 Ω, one for each LED)
-1 momentary push button
-Breadboard and jumper wires
-USB cable or suitable regulated 5 V supply
-Wiring
-LED connections
-Connect each LED in series with its own resistor. The LED's anode (long
-leg) connects to the Arduino pin through the resistor. The cathode
-(short leg) connects to GND.
+- 14 individually controlled red LEDs.
+- 6 different lighting patterns.
+- 4 adjustable speed levels.
+- Single push-button control.
+- No automatic pattern switching.
+- Simple Arduino Nano implementation.
 
-LED Arduino Nano pin
-  1 D2
-  2 D3
-  3 D4
-  4 D5
-  5 D6
-  6 D7
-  7 D8
-  8 D9
-  9 D10
- 10 D11
- 11 D12
- 12 D13
- 13 A1
- 14 A2
-The order in the leds[] array must match the physical order of the
-LEDs around the ring. If the animation runs in the wrong direction,
-reverse the array order.
+##  Lighting Patterns
 
-Push button
-Button terminal Arduino Nano
+| No. | Pattern | Description |
+|---|---|---|
+| 1 | Running Light | A single LED moves around the circular arrangement. |
+| 2 | Alternate Flash | Odd and even LEDs turn on alternately. |
+| 3 | Opposite Chase | Two opposite LEDs move together. |
+| 4 | Scanner | A light moves forward and backward. |
+| 5 | Comet Effect | Three adjacent LEDs move together like a comet. |
+| 6 | Heartbeat | All LEDs flash in a double-pulse sequence. |
 
-One terminal A0
-Other terminal GND
+##  Speed Control
 
-The sketch uses INPUT_PULLUP, so an external pull-up resistor is not
-required. The button input is LOW while pressed.
+The project supports four speed levels:
 
-Button controls
-Button action Result
+| Level | Speed | Delay |
+|---|---|---|
+| 1 | Slow | 350 ms |
+| 2 | Medium | 200 ms |
+| 3 | Fast | 100 ms |
+| 4 | Very Fast | 50 ms |
 
-Power on / reset Starts with Pattern 1 at the slowest speed
-Short press (less than 700 ms) Selects the next pattern
-Long press (700 ms or longer) Selects the next speed
-Repeated short presses Cycles through all 6 patterns
-Repeated long presses Cycles through all 4 speeds
+##  Button Controls
 
-A long press changes the speed once. Releasing the button does not also
-change the pattern.
+The project uses one push button for all controls.
 
-Patterns
-Circular Running Light --- one LED moves around the ring.
-Alternate Flash --- alternating LED groups switch on and off.
-Opposite Chase --- two LEDs opposite each other move around the
-ring.
-Scanner --- one LED moves forward and backward.
-Comet Effect --- three adjacent LEDs move together around the
-ring.
-Heartbeat-style Flash --- all LEDs produce two flashes followed
-by a pause.
-Speed settings
-The speed is controlled by the delay between animation steps.
+- **Short Press:** Switch to the next lighting pattern.
+- **Long Press (700 ms):** Change the animation speed.
+- After the sixth pattern, the system returns to the first pattern.
+- Speed settings cycle back to the slowest level after the fastest level.
 
-Speed level Delay
+All pattern changes are controlled manually.
 
-Slow (default) 350 ms
-Medium 200 ms
-Fast 100 ms
-Very fast 50 ms
+##  Hardware Requirements
 
-These values can be changed in the speeds[] array in the Arduino
-sketch.
+| Component | Quantity |
+|---|---:|
+| Arduino Nano | 1 |
+| Red LEDs | 14 |
+| 220Ω–330Ω Resistors | 14 |
+| Push Button | 1 |
+| Breadboard | 1 |
+| Jumper Wires | As needed |
+| USB Cable | 1 |
 
-Uploading the sketch
-Install the Arduino IDE.
-Connect the Arduino Nano to your computer using USB.
-Open the project .ino sketch.
-In Tools → Board, select Arduino Nano.
-In Tools → Processor, select the processor option that matches
-your Nano (many classic Nano boards use ATmega328P; some older
-clones may require ATmega328P (Old Bootloader)).
-In Tools → Port, select the correct serial port.
-Click Upload.
-Electrical and safety notes
-Use one current-limiting resistor for each LED. Do not connect
-an LED directly to an Arduino output pin.
-Do not assume the Nano can safely supply the combined current of all
-14 LEDs. Keep within the board and microcontroller pin-current
-limits.
-If the total LED current is too high, use suitable transistor or
-MOSFET driver circuitry and a regulated external 5 V supply. Connect
-the external supply ground to Arduino GND (common ground).
-Do not connect an external 5 V supply and USB power in a way that
-causes the supplies to drive each other.
-Check LED polarity before powering the circuit.
-Project structure
-A simple GitHub repository can use this structure:
 
+
+### LED Connections
+
+| LED | Arduino Pin |
+|---|---|
+| LED 1 | D2 |
+| LED 2 | D3 |
+| LED 3 | D4 |
+| LED 4 | D5 |
+| LED 5 | D6 |
+| LED 6 | D7 |
+| LED 7 | D8 |
+| LED 8 | D9 |
+| LED 9 | D10 |
+| LED 10 | D11 |
+| LED 11 | D12 |
+| LED 12 | D13 |
+| LED 13 | A1 |
+| LED 14 | A2 |
+
+### Push Button Connection
+
+| Button Terminal | Arduino Pin |
+|---|---|
+| Terminal 1 | A0 |
+| Terminal 2 | GND |
+
+Each LED must have its own current-limiting resistor connected in series.
+
+The push button uses the Arduino internal pull-up resistor (`INPUT_PULLUP`).
+
+##  Software Requirements
+
+- Arduino IDE
+- Arduino Nano board package
+- USB connection for programming
+
+##  Installation
+
+1. Download or clone this repository.
+2. Open the Arduino sketch in Arduino IDE.
+3. Connect the Arduino Nano to your computer.
+4. Select **Arduino Nano** from the Boards menu.
+5. Select the correct COM port.
+6. Upload the code.
+7. Enjoy the LED animations!
+
+##  Electrical Safety
+
+- Use a separate resistor for each LED.
+- Do not exceed the Arduino Nano GPIO current limits.
+- Use suitable transistor drivers and an external regulated 5V supply if the total LED current exceeds safe board limits.
+- Connect the external supply ground to Arduino GND.
+- Do not connect an external 5V supply directly to the 5V pin while USB power is connected unless the power arrangement is designed to prevent backfeeding.
+
+##  Project Structure
+
+```text
 14-LED-Circular-Animation/
+│
+├── 14_LED_Animation.ino
 ├── README.md
-└── 14_LED_Circular_Animation/
-    └── 14_LED_Circular_Animation.ino
-Customization
-Change LED order: edit the leds[] array.
-Change speed: edit the values in the speeds[] array.
-Change long-press duration: edit longPressTime.
-Change patterns: edit the pattern functions and PATTERN_COUNT
-together.
-terms.
+└── LICENSE
+```
 
+
+This project is open-source and available for educational and personal use.
